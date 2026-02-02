@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Sahar ❤️</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff0f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+        h2 { color: #ff4d6d; margin-bottom: 1.5rem; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff758f;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+        button:hover { background-color: #ff4d6d; transform: scale(1.02); }
+        .hidden { display: none; }
+        .emoji-prompt { font-size: 3rem; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div id="page1">
+        <h2>Sahar, will you be my Valentine?</h2>
+        <div class="options">
+            <button onclick="nextPage(2)">Yes</button>
+            <button onclick="nextPage(2)">Definitely Yes</button>
+            <button onclick="noButton()">No</button>
+        </div>
+    </div>
+
+    <div id="page2" class="hidden">
+        <h2>Where would you like to travel next?</h2>
+        <div class="options">
+            <button onclick="travelChoice('Good Choice!')">Kashmir</button>
+            <button onclick="travelChoice('Good Choice!')">Goa</button>
+            <button onclick="travelChoice('Good Choice!')">Udaipur</button>
+            <button onclick="travelChoice('A secret adventure!')">Don't Reveal</button>
+        </div>
+    </div>
+
+    <div id="page3" class="hidden">
+        <h2>When did we meet for the first time?</h2>
+        <div class="options">
+            <button onclick="dateChoice(false)">18th Feb</button>
+            <button onclick="dateChoice(true)">4th Dec</button>
+            <button onclick="dateChoice(false)">18th Nov</button>
+        </div>
+        <div id="dateFeedback" class="emoji-prompt"></div>
+    </div>
+
+    <div id="page4" class="hidden">
+        <h2>What was the first gift I bought for you?</h2>
+        <div class="options">
+            <button onclick="giftChoice(false)">Mobile</button>
+            <button onclick="giftChoice(false)">Watch</button>
+            <button onclick="giftChoice(true)">Watch and Roses</button>
+        </div>
+        <div id="giftFeedback" class="emoji-prompt"></div>
+    </div>
+
+    <div id="finalPage" class="hidden">
+        <h2>I Love You! ❤️</h2>
+        <p>You made it to the end!</p>
+    </div>
+</div>
+
+<script>
+    function nextPage(pageNumber) {
+        document.querySelectorAll('.card > div').forEach(div => div.classList.add('hidden'));
+        document.getElementById('page' + pageNumber).classList.remove('hidden');
+    }
+
+    function noButton() {
+        alert("Wrong answer! Try again 😉");
+    }
+
+    function travelChoice(message) {
+        alert(message);
+        nextPage(3);
+    }
+
+    function dateChoice(isCorrect) {
+        const feedback = document.getElementById('dateFeedback');
+        if (isCorrect) {
+            feedback.innerHTML = "❤️";
+            setTimeout(() => nextPage(4), 1500);
+        } else {
+            feedback.innerHTML = "😡";
+            setTimeout(() => { feedback.innerHTML = ""; }, 1000);
+        }
+    }
+
+    function giftChoice(isCorrect) {
+        const feedback = document.getElementById('giftFeedback');
+        if (isCorrect) {
+            feedback.innerHTML = "❤️";
+            setTimeout(() => {
+                document.querySelectorAll('.card > div').forEach(div => div.classList.add('hidden'));
+                document.getElementById('finalPage').classList.remove('hidden');
+            }, 1500);
+        } else {
+            feedback.innerHTML = "❌ That's not it!";
+            setTimeout(() => { feedback.innerHTML = ""; }, 1000);
+        }
+    }
+</script>
+
+</body>
+</html>
